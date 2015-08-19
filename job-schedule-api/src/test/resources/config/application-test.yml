@@ -1,0 +1,14 @@
+# See http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+# See http://symfony.com/fr/doc/current/components/yaml/yaml_format.html
+# See http://codebeautify.org/yaml-validator
+
+# APPLICATION SETTINGS
+spring:
+    profiles:
+       active: test
+
+# JPA
+spring.jpa:
+  databasePlatform: org.hibernate.dialect.H2Dialect
+  generate-ddl: true
+  hibernate.ddl-auto: none

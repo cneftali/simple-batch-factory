@@ -1,0 +1,28 @@
+# See http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+# See http://symfony.com/fr/doc/current/components/yaml/yaml_format.html
+# See http://codebeautify.org/yaml-validator
+
+# APPLICATION SETTINGS
+spring:
+    profiles:
+       active: docker
+
+# HIKARICP
+spring.datasource:
+     url:jdbc: mysql://localhost:3306/exampledb
+     username: root
+     password:
+     poolName: SpringBootHikariCP
+     maximumPoolSize: 5
+     minimumIdle: 3
+     maxLifetime: 2000000
+     connectionTimeout: 30000
+     idleTimeout: 30000
+     pool-prepared-statements: true
+     max-open-prepared-statements: 250
+
+# JPA
+spring.jpa:
+  databasePlatform: org.hibernate.dialect.PostgreSQL9Dialect
+  generate-ddl: false
+  hibernate.ddl-auto: none
