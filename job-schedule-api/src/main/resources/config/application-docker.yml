@@ -9,9 +9,9 @@ spring:
 
 # HIKARICP
 spring.datasource:
-     url:jdbc: mysql://localhost:3306/exampledb
-     username: root
-     password:
+     url: jdbc:postgresql://devpostgres/pguser
+     username: pguser
+     password: pgdb
      poolName: SpringBootHikariCP
      maximumPoolSize: 5
      minimumIdle: 3
