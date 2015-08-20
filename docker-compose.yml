@@ -4,17 +4,20 @@ webrest:
     - "8080"
     - "1221"
   links:
-    - db:devpostgres
+    - postgres:devpostgres.cne
 
-db:
-  image: andreagrandi/postgresql:9.3
+postgres:
+  image: postgres:latest
+  environment:
+      POSTGRES_PASSWORD: docker
+      POSTGRES_USER: docker
   volumes_from:
     - dbdata
   ports:
     - "5432:5432"
 
 dbdata:
-  image: andreagrandi/postgresql:9.3
+  image: postgres:latest
   volumes:
     - /var/lib/postgresql
-  command: true
+  command: "true"

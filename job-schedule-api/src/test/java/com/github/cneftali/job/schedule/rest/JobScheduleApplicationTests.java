@@ -41,7 +41,7 @@ import org.springframework.web.client.RestTemplate;
 @WebIntegrationTest(randomPort = true)
 @DirtiesContext(classMode = AFTER_EACH_TEST_METHOD)
 @ActiveProfiles("test")
-public class JobScheduleApplicationTestITG {
+public class JobScheduleApplicationTests {
 
     @Value("${local.server.port}")
     private int port;

@@ -9,10 +9,10 @@ spring.jpa:
     database: POSTGRESQL
     hibernate.ddl-auto: update
 spring.datasource:
-        url: jdbc:postgresql://devpostgres:5432/pguser
+        url: jdbc:postgresql://devpostgres.cne:5432/docker
         driver-class-name: org.postgresql.Driver
-        username: pguser
-        password: pgdb
+        username: docker
+        password: docker
         poolName: SpringBootHikariCP
         maximumPoolSize: 5
         minimumIdle: 3
