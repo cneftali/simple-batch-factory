@@ -1,8 +1,8 @@
 webrest:
   build: job-schedule-api
   ports:
-    - "8080"
-    - "1221"
+    - "80:8080"
+    - "1221:1221"
   links:
     - postgres:devpostgres.cne
 
