@@ -1,5 +1,14 @@
 # Spring Boot Docker
 
+This is a quick tech demo how schedule a remote job:
+[Spring Boot](http://projects.spring.io/spring-boot/),
+[Spring Data Rest](http://projects.spring.io/spring-data-rest/)
+[Spring Data JPA] (http://projects.spring.io/spring-data-jpa/)
+[Spring Batch](http://projects.spring.io/spring-batch/),
+[Spring Integration](http://projects.spring.io/spring-integration/),
+[Docker](https://www.docker.io/) and
+[Microservices](http://martinfowler.com/articles/microservices.html).
+
 ## Requirements
     1. Docker and Docker Compose
     2. maven and jdk 8
