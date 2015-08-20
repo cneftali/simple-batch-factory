@@ -1,7 +1,7 @@
 # Spring Boot Docker
 
 ## Requirements
-    1. [Docker and Docker Compose](https://docs.docker.com/compose/#installation-and-set-up)
+    1. Docker and Docker Compose
     
 ## Building from Source
 
@@ -12,7 +12,7 @@ Clone the git repository using the URL on the github home page:
     $ mvn clean install
 
 
-## HowTo [Docker and Docker Compose](https://docs.docker.com/compose/#installation-and-set-up)
+## [Docker and Docker Compose](https://docs.docker.com/compose/#installation-and-set-up)
 
     # 1. Build the Spring Boot Docker app
     
