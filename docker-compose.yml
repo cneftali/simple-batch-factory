@@ -2,14 +2,9 @@ webrest:
   build: job-schedule-api
   ports:
     - "8080"
-    - "5005"
     - "1221"
-  volumes:
-    - ./job-schedule-api:/data
-    - ~/.m2:/root/.m2
   links:
     - db:devpostgres
-
 
 db:
   image: andreagrandi/postgresql:9.3

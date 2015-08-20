@@ -1,28 +1,26 @@
 # See http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
 # See http://symfony.com/fr/doc/current/components/yaml/yaml_format.html
 # See http://codebeautify.org/yaml-validator
-
-# APPLICATION SETTINGS
+# For deployment in Docker containers
 spring:
     profiles:
        active: docker
-
-# HIKARICP
-spring.datasource:
-     url: jdbc:postgresql://devpostgres/pguser
-     username: pguser
-     password: pgdb
-     poolName: SpringBootHikariCP
-     maximumPoolSize: 5
-     minimumIdle: 3
-     maxLifetime: 2000000
-     connectionTimeout: 30000
-     idleTimeout: 30000
-     pool-prepared-statements: true
-     max-open-prepared-statements: 250
-
-# JPA
 spring.jpa:
-  databasePlatform: org.hibernate.dialect.PostgreSQL9Dialect
-  generate-ddl: false
-  hibernate.ddl-auto: none
+    database: POSTGRESQL
+    hibernate.ddl-auto: update
+spring.datasource:
+        url: jdbc:postgresql://devpostgres:5432/pguser
+        driver-class-name: org.postgresql.Driver
+        username: pguser
+        password: pgdb
+        poolName: SpringBootHikariCP
+        maximumPoolSize: 5
+        minimumIdle: 3
+        maxLifetime: 2000000
+        connectionTimeout: 30000
+        idleTimeout: 30000
+        pool-prepared-statements: true
+        max-open-prepared-statements: 250
+
+server:
+    port: 8080

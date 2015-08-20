@@ -19,6 +19,3 @@ endpoints:
 
 # LOGGING
 logging.config: log4j2.xml
-
-
-
