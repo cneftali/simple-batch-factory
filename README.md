@@ -24,7 +24,7 @@ Clone the git repository using the URL on the github home page:
     
     # 3. Try it!
     
-    $ curl http://localhost/jobs
+        $ curl http://localhost/jobs
         {
           "_links" : {
             "self" : {
