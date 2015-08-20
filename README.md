@@ -24,15 +24,19 @@ Clone the git repository using the URL on the github home page:
 
 ## [Docker and Docker Compose](https://docs.docker.com/compose/#installation-and-set-up)
 
-    # 1. Build the Spring Boot Docker app
+    # 1. Maven compile the Spring Boot Docker Project
     
     $ mvn clean install
     
-    # 2. builds and run with docker-compose
+    # 2. Build Images
 
-    $ docker-compose up
+    $ docker-compose build
+   
+    # 2. Start all the containers
     
-    # 3. Try it!
+    $ docker-compose up -d
+        
+    # 4. Try it!
     
         $ curl http://localhost/jobs
         {
@@ -74,3 +78,11 @@ Clone the git repository using the URL on the github home page:
             }
           }
         }
+    
+    # 5. Logs
+    
+    $ docker-compose logs
+    
+    # 6. Stopping All Services
+    
+    $ docker-compose stop 
