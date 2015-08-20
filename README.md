@@ -1,4 +1,4 @@
-# Spring Boot Docker - IN PROGESS
+# Spring Boot Docker - IN PROGRESS
 
 This is a quick tech demo how schedule a remote job:
 [Spring Boot](http://projects.spring.io/spring-boot/),
