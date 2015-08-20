@@ -2,6 +2,7 @@
 
 ## Requirements
     1. Docker and Docker Compose
+    2. maven and jdk 8
     
 ## Building from Source
 
