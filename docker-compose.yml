@@ -1,4 +1,5 @@
 webrest:
+  restart: always
   build: job-schedule-api
   ports:
     - "80:8080"
@@ -6,7 +7,15 @@ webrest:
   links:
     - postgres:devpostgres.cne
 
+dbdata:
+  restart: always
+  image: postgres:latest
+  volumes:
+    - /var/lib/postgresql
+  command: "true"
+
 postgres:
+  restart: always
   image: postgres:latest
   environment:
       POSTGRES_PASSWORD: docker
@@ -15,9 +24,3 @@ postgres:
     - dbdata
   ports:
     - "5432:5432"
-
-dbdata:
-  image: postgres:latest
-  volumes:
-    - /var/lib/postgresql
-  command: "true"
