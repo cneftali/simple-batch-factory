@@ -19,7 +19,8 @@
 
     <modules>
         <module>batch-import-service</module>
-        <module>job-schedule-api</module>
+        <module>job-schedule-service</module>
+        <module>job-commons</module>
     </modules>
 
     <scm>

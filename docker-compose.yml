@@ -1,6 +1,6 @@
 webrest:
   restart: always
-  build: job-schedule-api
+  build: job-schedule-service
   ports:
     - "80:8080"
     - "1221:1221"
