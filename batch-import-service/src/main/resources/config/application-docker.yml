@@ -5,9 +5,6 @@
 spring:
     profiles:
        active: docker
-spring.jpa:
-    database: POSTGRESQL
-    hibernate.ddl-auto: update
 spring.datasource:
         url: jdbc:postgresql://devpostgres.cne:5432/docker
         driver-class-name: org.postgresql.Driver
@@ -24,6 +21,3 @@ spring.datasource:
 
 server:
     port: 8080
-
-application:
-  batch.import.url: http://batchImport.cne/batchImport

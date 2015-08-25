@@ -6,6 +6,16 @@ webrest:
     - "1221:1221"
   links:
     - postgres:devpostgres.cne
+    - batchImport:batchImport.cne
+
+batchImport:
+  restart: always
+  build: job-schedule-service
+  ports:
+      - "8080:8080"
+      - "1221:1221"
+  links:
+      - postgres:devpostgres.cne
 
 dbdata:
   restart: always
