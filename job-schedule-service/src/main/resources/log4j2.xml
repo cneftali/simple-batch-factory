@@ -4,19 +4,18 @@
         <Console name="CONSOLE" target="SYSTEM_OUT">
             <PatternLayout pattern="%d [%t] %-5p %c - %m%n"/>
         </Console>
-        <Async name="ASYNC">
-            <AppenderRef ref="CONSOLE"/>
-        </Async>
     </Appenders>
     <Loggers>
         <Logger name="com.github.cneftali" level="INFO" />
         <Logger name="org.springframework" level="ERROR" />
         <Logger name="org.springframework.boot" level="ERROR" />
         <Logger name="org.springframework.batch" level="ERROR" />
+        <Logger name="org.springframework.orm.jpa" level="ERROR" />
         <Logger name="org.springframework.batch.core.launch.support" level="ERROR"/>
         <Logger name="org.springframework.integration" level="ERROR"/>
+        <Logger name="org.apache" level="ERROR"/>
         <Root level="ERROR">
-            <AppenderRef ref="ASYNC"/>
+            <AppenderRef ref="CONSOLE"/>
         </Root>
     </Loggers>
 </Configuration>

@@ -9,6 +9,14 @@ This is a quick tech demo how schedule a remote job:
 [Docker](https://www.docker.io/) and
 [Microservices](http://martinfowler.com/articles/microservices.html).
 
+## Diagram
+<code>
+|----------------------|
+|                      |
+| JOB-SCHEDULE-SERVICE |
+|                      |
+|----------------------|
+</code>
 ## Requirements
     1. Docker and Docker Compose
     2. maven and jdk 8

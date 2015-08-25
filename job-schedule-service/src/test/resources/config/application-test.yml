@@ -12,3 +12,9 @@ spring.jpa:
   databasePlatform: org.hibernate.dialect.H2Dialect
   generate-ddl: true
   hibernate.ddl-auto: none
+spring.jpa.properties:
+  hibernate.format_sql: true
+  hibernate.show_sql: false
+
+application:
+  batch.import.url: http://localhost:${server.port}/batchImport

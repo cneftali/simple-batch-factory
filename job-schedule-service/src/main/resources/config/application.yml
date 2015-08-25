@@ -5,6 +5,7 @@
 # APPLICATION SETTINGS
 spring:
     application.name: job-scheduler-ws
+    main.show-banner: false
     main.web-environment: true
     jmx.enabled : true
     jmx.default-domain: ${spring.application.name}

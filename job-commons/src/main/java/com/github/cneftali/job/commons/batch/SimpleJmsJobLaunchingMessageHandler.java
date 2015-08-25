@@ -14,8 +14,10 @@ import org.springframework.batch.core.configuration.JobRegistry;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Required;
+import org.springframework.integration.annotation.MessageEndpoint;
 import org.springframework.integration.annotation.ServiceActivator;
 
+@MessageEndpoint
 public class SimpleJmsJobLaunchingMessageHandler implements JobLaunchRequestHandler<JobExecution>,
                                                             InitializingBean {
 
