@@ -1,4 +1,4 @@
-# Simple Batch Factory - IN PROGRESS
+# Simple Batch Factory
 
 This is a quick tech demo how write a simple batch factory:
 - [Spring Boot](http://projects.spring.io/spring-boot/),
@@ -57,6 +57,7 @@ Clone the git repository using the URL on the github home page:
           }
         }
         
+     # 5. launch job 'jobName' in future :
         $ curl -i -X POST -H "Content-Type:application/json" -d '{ "jobName":"jobName", "jobParameter": {"id":1, "param1": "value"}, "dateStart":"2050-07-10T14:49:04.206Z"}' http://localhost/jobs
         HTTP/1.1 201 Created
         Server: Apache-Coyote/1.1
@@ -64,14 +65,14 @@ Clone the git repository using the URL on the github home page:
         Content-Length: 0
         Date: Thu, 20 Aug 2015 13:08:45 GMT
         
-        $ curl http://localhost/jobs/1
+        $ curl -i http://localhost/jobs/1
         {
           "jobName" : "jobName",
           "jobParameter" : {
             "id" : 1,
             "param1" : "value"
           },
-          "dateStart" : 1436539744206,
+          "dateStart" : :2541077344206,
           "jobStatus" : "WAITING",
           "_links" : {
             "self" : {
@@ -79,6 +80,21 @@ Clone the git repository using the URL on the github home page:
             }
           }
         }
+        
+     # 5. launch job 'jobName' now :
+            $ curl -i -X POST -H "Content-Type:application/json" -d '{ "jobName":"jobName", "jobParameter": {"id":1, "param1": "value"}, "dateStart":"2015-07-10T14:49:04.206Z"}' http://localhost/jobs
+            HTTP/1.1 201 Created
+            Server: Apache-Coyote/1.1
+            Location: http://localhost/jobs/1
+            Content-Length: 0
+            Date: Thu, 20 Aug 2015 13:08:45 GMT
+            
+            $ curl -i http://localhost/jobs/1
+            HTTP/1.1 404 Not Found
+            Connection: keep-alive
+            Content-Length: 0
+            Date: Wed, 26 Aug 2015 14:51:27 GMT
+
     
     # 5. Logs
     
