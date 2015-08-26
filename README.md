@@ -95,7 +95,7 @@ Clone the git repository using the URL on the github home page:
             Content-Length: 0
             Date: Wed, 26 Aug 2015 14:51:27 GMT
    
-    # 7. send directly in engine :
+    # 7. send directly in engine (docker host engine-servicex1.cne):
            $ curl -i -X POST -H "Content-Type:application/json" -d '{"jobName":"jobName","jobParameters":{"parameters":{"id":{"identifying":true,"value":"1","type":"STRING"},"param1":{"identifying":true,"value":"value","type":"STRING"}}},"scheduleId":1,"createTime":1440599326140}' http://localhost:8080/process
            HTTP/1.1 201 Created
            Connection: keep-alive
