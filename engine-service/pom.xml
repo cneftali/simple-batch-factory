@@ -68,11 +68,6 @@
             <artifactId>spring-integration-java-dsl</artifactId>
             <version>1.0.2.RELEASE</version>
         </dependency>
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-            <version>4.3.6</version>
-        </dependency>
 
         <!-- Test -->
         <dependency>

@@ -6,16 +6,16 @@ webrest:
     - "1221:1221"
   links:
     - postgres:devpostgres.cne
-    - engineService:engineService.cne
+    - engineService1:engineService1.cne
 
-engineService:
+engineService1:
   restart: always
   build: engine-service
   ports:
       - "8080:8080"
       - "1221:1221"
-  links:
-      - postgres:devpostgres.cne
+  environment:
+    application.engine.id: 2
 
 dbdata:
   restart: always
