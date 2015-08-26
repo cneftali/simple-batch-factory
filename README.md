@@ -6,7 +6,7 @@ This is a quick tech demo how write a simple batch factory:
 [Spring Data JPA] (http://projects.spring.io/spring-data-jpa/)
 [Spring Batch](http://projects.spring.io/spring-batch/),
 [Spring Integration](http://projects.spring.io/spring-integration/),
-[Undertow](http://undertow.io/)
+[Undertow](http://undertow.io/),
 [Docker](https://www.docker.io/) and
 [Microservices](http://martinfowler.com/articles/microservices.html).
 
@@ -57,7 +57,7 @@ Clone the git repository using the URL on the github home page:
           }
         }
         
-        $ curl -i -X POST -H "Content-Type:application/json" -d '{ "jobName":"jobImport", "jobParameter": {"id":1, "param1": "value"}, "podId": "3", "dateStart":"2015-07-10T14:49:04.206Z", "clientId": 1101007541}' http://localhost/jobs
+        $ curl -i -X POST -H "Content-Type:application/json" -d '{ "jobName":"jobName", "jobParameter": {"id":1, "param1": "value"}, "dateStart":"2015-07-10T14:49:04.206Z"}' http://localhost/jobs
         HTTP/1.1 201 Created
         Server: Apache-Coyote/1.1
         Location: http://localhost/jobs/1
@@ -66,14 +66,12 @@ Clone the git repository using the URL on the github home page:
         
         $ curl http://localhost/jobs/1
         {
-          "jobName" : "jobImport",
+          "jobName" : "jobName",
           "jobParameter" : {
             "id" : 1,
             "param1" : "value"
           },
-          "podId" : 3,
           "dateStart" : 1436539744206,
-          "clientId" : 1101007541,
           "jobStatus" : "WAITING",
           "_links" : {
             "self" : {
