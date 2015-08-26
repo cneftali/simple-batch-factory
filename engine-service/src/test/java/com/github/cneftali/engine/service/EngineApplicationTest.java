@@ -1,4 +1,4 @@
-package com.github.cneftali.engine.batchImport;
+package com.github.cneftali.engine.service;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static org.springframework.http.HttpStatus.CREATED;
@@ -11,6 +11,7 @@ import javax.xml.transform.Source;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.cneftali.job.commons.batch.JobLaunchRequest;
+import com.github.cneftali.job.commons.batch.JobLaunchingResponse;
 import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -52,7 +53,7 @@ public class EngineApplicationTest {
     private RestTemplate restTemplate = new TestRestTemplate();
 
     private String getBaseUrl() {
-        return "http://localhost:" + port + "/batchImport";
+        return "http://localhost:" + port + "/process";
     }
 
     @BeforeClass
@@ -88,9 +89,9 @@ public class EngineApplicationTest {
                                                                DateTime.now());
 
         // When
-        final ResponseEntity<JobLaunchRequest> entity = restTemplate.postForEntity(getBaseUrl(),
-                                                                                   aRequest,
-                                                                                   JobLaunchRequest.class);
+        final ResponseEntity<JobLaunchingResponse> entity = restTemplate.postForEntity(getBaseUrl(),
+                                                                                       aRequest,
+                                                                                       JobLaunchingResponse.class);
 
         // Then
         assertThat(entity.getBody()).isNotNull();

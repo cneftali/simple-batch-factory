@@ -1,4 +1,4 @@
-package com.github.cneftali.engine.batchImport.conf;
+package com.github.cneftali.engine.service.conf;
 
 import javax.annotation.PostConstruct;
 

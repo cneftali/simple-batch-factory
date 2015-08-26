@@ -24,11 +24,10 @@ public class JobRequestTransformer {
     @Transformer
     public JobLaunchRequest transform(final JobRequest payload) throws JSONException {
         LOGGER.debug(LOG_ENTERING_IN_METHOD_WITH_PAYLOAD, METHOD_NAME_TRANSFORM, payload);
-        final JobParametersBuilder builder = new JobParametersBuilder().addLong("podId", payload.getPodId())
-                                                                       .addLong("clientId", payload.getClientId());
+        final JobParametersBuilder builder = new JobParametersBuilder();
         final Iterator iterator = payload.getJobParameter().keys();
         while (iterator.hasNext()) {
-            String parameterKey = iterator.next().toString();
+            final String parameterKey = iterator.next().toString();
             builder.addString(parameterKey, payload.getJobParameter().getString(parameterKey));
         }
 

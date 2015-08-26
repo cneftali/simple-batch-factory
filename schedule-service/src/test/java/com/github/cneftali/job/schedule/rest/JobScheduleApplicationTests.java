@@ -89,8 +89,6 @@ public class JobScheduleApplicationTests {
         // Given
         final JobRequest jobRequest = new JobRequest("jobName",
                                                      new JSONObject("{\"parameter1\":\"value1\", \"parameter3\":\"value2\"}"),
-                                                     1L,
-                                                     5L,
                                                      DateTime.now());
 
         // When
@@ -103,8 +101,6 @@ public class JobScheduleApplicationTests {
         assertThat(result).isNotNull();
         assertThat(result.getJobStatus()).isEqualTo(jobRequest.getJobStatus());
         assertThat(result.getJobName()).isEqualTo(jobRequest.getJobName());
-        assertThat(result.getClientId()).isEqualTo(jobRequest.getClientId());
-        assertThat(result.getPodId()).isEqualTo(jobRequest.getPodId());
     }
 
     @Test
@@ -114,8 +110,6 @@ public class JobScheduleApplicationTests {
                                                                       new JSONObject(
                                                                               "{\"parameter1\":\"value1\", " +
                                                                               "\"parameter3\":\"value2\"}"),
-                                                                      1L,
-                                                                      5L,
                                                                       DateTime.now()));
 
         // When

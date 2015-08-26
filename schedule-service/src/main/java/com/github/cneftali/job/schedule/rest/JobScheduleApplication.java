@@ -10,8 +10,10 @@ import static com.fasterxml.jackson.databind.SerializationFeature.WRITE_NULL_MAP
 
 import com.fasterxml.jackson.datatype.joda.JodaModule;
 import com.fasterxml.jackson.datatype.jsonorg.JsonOrgModule;
+import com.github.cneftali.job.commons.jackson.ExitStatusJacksonMixIn;
 import com.github.cneftali.job.commons.jackson.JobParameterJacksonMixIn;
 import com.github.cneftali.job.commons.jackson.JobParametersJacksonMixIn;
+import org.springframework.batch.core.ExitStatus;
 import org.springframework.batch.core.JobParameter;
 import org.springframework.batch.core.JobParameters;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -42,11 +44,10 @@ public class JobScheduleApplication {
                 .featuresToEnable(WRITE_DATES_AS_TIMESTAMPS,
                                   ACCEPT_EMPTY_STRING_AS_NULL_OBJECT)
                 .mixIn(JobParameters.class, JobParametersJacksonMixIn.class)
-                .mixIn(JobParameter.class, JobParameterJacksonMixIn.class);
+                .mixIn(JobParameter.class, JobParameterJacksonMixIn.class)
+                .mixIn(ExitStatus.class, ExitStatusJacksonMixIn.class);
         return builder;
     }
-
-
 
     public static void main(final String... args) throws Exception {
         new SpringApplicationBuilder(JobScheduleApplication.class).registerShutdownHook(true)

@@ -19,6 +19,7 @@ import com.github.cneftali.job.commons.batch.JobLaunchRequest;
 import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.batch.core.ExitStatus;
 import org.springframework.batch.core.JobParameter;
 import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.JobParametersBuilder;
@@ -41,6 +42,8 @@ public class JobParameterJacksonDeserializerTest {
                                              JobParametersJacksonMixIn.class)
                                    .addMixIn(JobParameter.class,
                                              JobParameterJacksonMixIn.class)
+                                   .addMixIn(ExitStatus.class,
+                                             ExitStatusJacksonMixIn.class)
                                    .setSerializationInclusion(NON_NULL);
     }
 

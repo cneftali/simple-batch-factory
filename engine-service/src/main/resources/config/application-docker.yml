@@ -5,19 +5,6 @@
 spring:
     profiles:
        active: docker
-spring.datasource:
-        url: jdbc:postgresql://devpostgres.cne:5432/docker
-        driver-class-name: org.postgresql.Driver
-        username: docker
-        password: docker
-        poolName: SpringBootHikariCP
-        maximumPoolSize: 5
-        minimumIdle: 3
-        maxLifetime: 2000000
-        connectionTimeout: 30000
-        idleTimeout: 30000
-        pool-prepared-statements: true
-        max-open-prepared-statements: 250
 
 server:
     port: 8080

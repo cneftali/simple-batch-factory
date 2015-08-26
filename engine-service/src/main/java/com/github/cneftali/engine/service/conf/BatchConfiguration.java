@@ -1,4 +1,4 @@
-package com.github.cneftali.engine.batchImport.conf;
+package com.github.cneftali.engine.service.conf;
 
 import static org.springframework.batch.repeat.RepeatStatus.FINISHED;
 
@@ -60,21 +60,20 @@ public class BatchConfiguration extends MemBatchConfigurer {
 
     @Bean
     protected Job job() {
-        //FIXME SAMPLE / TEMPLATE JOB
         return this.jobs.get(env.getRequiredProperty("application.job.name"))
-                        .start(step1())
+                        .start(helloWorldStep())
                         .build();
     }
 
     @Bean
-    protected Step step1() {
-        //FIXME SAMPLE / TEMPLATE STEP
-        return this.steps.get("step1")
+    protected Step helloWorldStep() {
+        return this.steps.get("helloWorldStep")
                          .tasklet(new Tasklet() {
-                             private final Logger logger = LoggerFactory.getLogger("com.github.cneftali.engine.batchImport.SampleTasklet");
+                             private final Logger logger = LoggerFactory.getLogger("com.github.cneftali.engine.serviceSampleTasklet");
 
                              @Override
-                             public RepeatStatus execute(StepContribution stepContribution, ChunkContext chunkContext)
+                             public RepeatStatus execute(final StepContribution stepContribution,
+                                                         final ChunkContext chunkContext)
                                      throws Exception {
 
                                  logger.info("Sample STEP");

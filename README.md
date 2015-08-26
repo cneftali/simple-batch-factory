@@ -1,6 +1,6 @@
-# Spring Boot Docker - IN PROGRESS
+# Simple Batch Factory - IN PROGRESS
 
-This is a quick tech demo how schedule a remote job:
+This is a quick tech demo how write a simple batch factory:
 [Spring Boot](http://projects.spring.io/spring-boot/),
 [Spring Data Rest](http://projects.spring.io/spring-data-rest/)
 [Spring Data JPA] (http://projects.spring.io/spring-data-jpa/)

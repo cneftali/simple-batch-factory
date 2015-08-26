@@ -44,14 +44,8 @@ public class JobRequest implements Serializable {
     @Column(name = "JOB_PARAMETER", updatable = false, length = 2000, nullable = false)
     private JSONObject jobParameter;
 
-    @Column(name = "POD_ID", updatable = false, nullable = false)
-    private Long podId;
-
     @Column(name = "DATE_START", updatable = false, nullable = false)
     private DateTime dateStart;
-
-    @Column(name = "CLIENT_ID", updatable = false, nullable = false)
-    private Long clientId;
 
     @Column(name = "STATUS", nullable = false)
     private JobStatus jobStatus = JobStatus.WAITING;
@@ -61,14 +55,10 @@ public class JobRequest implements Serializable {
 
     public JobRequest(final String jobName,
                       final JSONObject jobParameter,
-                      final Long podId,
-                      final Long clientId,
                       final DateTime dateStart) {
         this();
         this.jobName = jobName;
         this.jobParameter = jobParameter;
-        this.podId = podId;
-        this.clientId = clientId;
         this.dateStart = dateStart;
     }
 
@@ -84,16 +74,9 @@ public class JobRequest implements Serializable {
         return jobParameter;
     }
 
-    public Long getPodId() {
-        return podId;
-    }
 
     public DateTime getDateStart() {
         return dateStart;
-    }
-
-    public Long getClientId() {
-        return clientId;
     }
 
     public JobStatus getJobStatus() {

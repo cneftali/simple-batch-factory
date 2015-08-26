@@ -1,6 +1,7 @@
 package com.github.cneftali.job.commons.batch;
 
 import org.springframework.batch.core.JobExecutionException;
+import org.springframework.messaging.Message;
 
 /**
  * The job launch request handler.
@@ -12,8 +13,8 @@ public interface JobLaunchRequestHandler<T> {
     /**
      * Launching method.
      *
-     * @param aRequest request
+     * @param request
      * @return response
      */
-    T launch(final JobLaunchRequest aRequest) throws JobExecutionException;
+    T launch(final Message<JobLaunchRequest> request) throws JobExecutionException;
 }

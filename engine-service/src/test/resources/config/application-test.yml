@@ -19,3 +19,4 @@ spring.datasource:
         idleTimeout: 30000
         pool-prepared-statements: true
         max-open-prepared-statements: 250
+application.engine.id: 2

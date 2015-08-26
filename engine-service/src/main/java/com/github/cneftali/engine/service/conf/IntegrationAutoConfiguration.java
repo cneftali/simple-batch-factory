@@ -1,4 +1,4 @@
-package com.github.cneftali.engine.batchImport.conf;
+package com.github.cneftali.engine.service.conf;
 
 import static org.springframework.http.HttpMethod.POST;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -41,15 +41,15 @@ public class IntegrationAutoConfiguration {
 
     @Bean
     public IntegrationFlow httpPostFlow() {
-        return IntegrationFlows.from(httpPostGate()).channel(c -> c.queue("requestChannel", 100)).handle("endpoint",
-                                                                                                         "post").get();
+        return IntegrationFlows.from(httpPostGate()).channel(c -> c.queue("requestChannel", 100)).handle("jobLaunchingMessageHandler",
+                                                                                                         "launch").get();
     }
 
     @Bean
     public MessagingGatewaySupport httpPostGate() {
         final HttpRequestHandlingMessagingGateway handler = new HttpRequestHandlingMessagingGateway(true);
         handler.setRequestMapping(createMapping(new HttpMethod[] { POST },
-                                                env.getRequiredProperty("application.job.name")));
+                                                env.getRequiredProperty("application.web.resource.name")));
         handler.setRequestPayloadType(JobLaunchRequest.class);
         handler.setHeaderMapper(headerMapper());
         return handler;

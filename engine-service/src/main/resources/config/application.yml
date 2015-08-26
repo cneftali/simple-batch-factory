@@ -4,7 +4,7 @@
 
 # APPLICATION SETTINGS
 spring:
-    application.name: batch-import-service
+    application.name: engine-service
     main.show-banner: false
     main.web-environment: true
     jmx.enabled : true
@@ -23,7 +23,8 @@ endpoints:
 # LOGGING
 logging.config: log4j2.xml
 
-application.job.name: batchImport
+application.job.name: jobName
+application.web.resource.name: process
 
 # UNDERTOW
 #server.undertow:

@@ -1,4 +1,4 @@
-package com.github.cneftali.engine.batchImport;
+package com.github.cneftali.engine.service;
 
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 import static com.fasterxml.jackson.databind.DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT;
@@ -10,8 +10,10 @@ import static com.fasterxml.jackson.databind.SerializationFeature.WRITE_NULL_MAP
 
 import com.fasterxml.jackson.datatype.joda.JodaModule;
 import com.fasterxml.jackson.datatype.jsonorg.JsonOrgModule;
+import com.github.cneftali.job.commons.jackson.ExitStatusJacksonMixIn;
 import com.github.cneftali.job.commons.jackson.JobParameterJacksonMixIn;
 import com.github.cneftali.job.commons.jackson.JobParametersJacksonMixIn;
+import org.springframework.batch.core.ExitStatus;
 import org.springframework.batch.core.JobParameter;
 import org.springframework.batch.core.JobParameters;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -26,7 +28,7 @@ import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 @Configuration
 @EnableAutoConfiguration(exclude = { ErrorMvcAutoConfiguration.class,
                                      WebMvcAutoConfiguration.class })
-@ComponentScan(basePackages = { "com.github.cneftali.engine.batchImport" })
+@ComponentScan(basePackages = { "com.github.cneftali.engine.service" })
 public class EngineApplication {
 
     @Bean
@@ -42,7 +44,8 @@ public class EngineApplication {
                 .featuresToEnable(WRITE_DATES_AS_TIMESTAMPS,
                                   ACCEPT_EMPTY_STRING_AS_NULL_OBJECT)
                 .mixIn(JobParameters.class, JobParametersJacksonMixIn.class)
-                .mixIn(JobParameter.class, JobParameterJacksonMixIn.class);
+                .mixIn(JobParameter.class, JobParameterJacksonMixIn.class)
+                .mixIn(ExitStatus.class, ExitStatusJacksonMixIn.class);
         return builder;
     }
 
