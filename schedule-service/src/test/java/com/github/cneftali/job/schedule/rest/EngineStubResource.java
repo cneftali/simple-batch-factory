@@ -1,5 +1,6 @@
 package com.github.cneftali.job.schedule.rest;
 
+import static org.springframework.batch.core.ExitStatus.COMPLETED;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 import java.util.Date;
@@ -19,6 +20,7 @@ public class EngineStubResource {
         return new JobLaunchingResponse(request.getCreateTime().toDate().getTime(),
                                         new Date().getTime(),
                                         1,
-                                        request.getJobName());
+                                        request.getJobName(),
+                                        COMPLETED);
     }
 }
