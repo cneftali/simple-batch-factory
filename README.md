@@ -29,15 +29,15 @@ Clone the git repository using the URL on the github home page:
 
     # 1. Maven compile the Spring Boot Docker Project
     
-    $ mvn clean install
+        $ mvn clean install
     
     # 2. Build Images
 
-    $ docker-compose build
+        $ docker-compose build
    
     # 2. Start all the containers
     
-    $ docker-compose up -d
+        $ docker-compose up -d
         
     # 4. Try it!
     
@@ -57,7 +57,7 @@ Clone the git repository using the URL on the github home page:
           }
         }
         
-     # 5. launch job 'jobName' in future :
+    # 5. launch job 'jobName' in future :
         $ curl -i -X POST -H "Content-Type:application/json" -d '{ "jobName":"jobName", "jobParameter": {"id":1, "param1": "value"}, "dateStart":"2050-07-10T14:49:04.206Z"}' http://localhost/jobs
         HTTP/1.1 201 Created
         Server: Apache-Coyote/1.1
@@ -81,7 +81,7 @@ Clone the git repository using the URL on the github home page:
           }
         }
         
-     # 5. launch job 'jobName' now :
+    # 6. launch job 'jobName' now :
             $ curl -i -X POST -H "Content-Type:application/json" -d '{ "jobName":"jobName", "jobParameter": {"id":1, "param1": "value"}, "dateStart":"2015-07-10T14:49:04.206Z"}' http://localhost/jobs
             HTTP/1.1 201 Created
             Server: Apache-Coyote/1.1
@@ -96,10 +96,10 @@ Clone the git repository using the URL on the github home page:
             Date: Wed, 26 Aug 2015 14:51:27 GMT
 
     
-    # 5. Logs
+    # 7. Logs
     
-    $ docker-compose logs
+        $ docker-compose logs
     
     # 6. Stopping All Services
     
-    $ docker-compose stop 
+        $ docker-compose stop 
