@@ -95,7 +95,6 @@ Clone the git repository using the URL on the github home page:
             Content-Length: 0
             Date: Wed, 26 Aug 2015 14:51:27 GMT
 
-    
     # 7. Logs
     
         $ docker-compose logs
