@@ -1,16 +1,16 @@
 webrest:
   restart: always
-  build: job-schedule-service
+  build: schedule-service
   ports:
     - "80:8080"
     - "1221:1221"
   links:
     - postgres:devpostgres.cne
-    - batchImport:batchImport.cne
+    - engineService:engineService.cne
 
-batchImport:
+engineService:
   restart: always
-  build: job-schedule-service
+  build: engine-service
   ports:
       - "8080:8080"
       - "1221:1221"

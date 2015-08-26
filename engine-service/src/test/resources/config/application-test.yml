@@ -1,0 +1,21 @@
+# See http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+# See http://symfony.com/fr/doc/current/components/yaml/yaml_format.html
+# See http://codebeautify.org/yaml-validator
+
+# APPLICATION SETTINGS
+spring:
+    profiles:
+       active: test
+spring.datasource:
+        url: jdbc:h2:mem:test;MODE=PostgreSQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+        driver-class-name: org.h2.Driver
+        username: docker
+        password: docker
+        poolName: SpringBootHikariCP
+        maximumPoolSize: 5
+        minimumIdle: 3
+        maxLifetime: 2000000
+        connectionTimeout: 30000
+        idleTimeout: 30000
+        pool-prepared-statements: true
+        max-open-prepared-statements: 250

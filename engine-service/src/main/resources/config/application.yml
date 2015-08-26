@@ -1,0 +1,37 @@
+# See http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+# See http://symfony.com/fr/doc/current/components/yaml/yaml_format.html
+# See http://codebeautify.org/yaml-validator
+
+# APPLICATION SETTINGS
+spring:
+    application.name: batch-import-service
+    main.show-banner: false
+    main.web-environment: true
+    jmx.enabled : true
+    jmx.default-domain: ${spring.application.name}
+    datasource.jmx-enabled: true
+    batch:
+      job.enabled: false
+      initializer.enabled: false
+
+# JMX ENDPOINT
+endpoints:
+    jmx.enabled: true
+    jmx.domain: ${spring.application.name}
+    jmx.unique-names: false
+
+# LOGGING
+logging.config: log4j2.xml
+
+application.job.name: batchImport
+
+# UNDERTOW
+#server.undertow:
+#    accesslog.enabled: false # if access logging is enabled
+#    accesslog.pattern: common # log pattern of the access log
+#    accesslog.dir: logs # access logs directory
+#    buffer-size: # size of each buffer in bytes
+#    buffers-per-region: # number of buffer per region
+#    direct-buffers: false # allocate buffers outside the Java heap
+#    io-threads: # number of I/O threads to create for the worker
+#    worker-threads: # number of worker threads
