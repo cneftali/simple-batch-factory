@@ -95,7 +95,7 @@ Clone the git repository using the URL on the github home page:
             Content-Length: 0
             Date: Wed, 26 Aug 2015 14:51:27 GMT
    
-    # 8. send directly in engine :
+    # 7. send directly in engine :
            $ curl -i -X POST -H "Content-Type:application/json" -d '{"jobName":"jobName","jobParameters":{"parameters":{"id":{"identifying":true,"value":"1","type":"STRING"},"param1":{"identifying":true,"value":"value","type":"STRING"}}},"scheduleId":1,"createTime":1440599326140}' http://localhost:8080/process
            HTTP/1.1 201 Created
            Connection: keep-alive
@@ -103,10 +103,10 @@ Clone the git repository using the URL on the github home page:
            Content-Type: application/json;charset=UTF-8
            Date: Wed, 26 Aug 2015 14:55:46 GMT
            
-    # 7. Logs
+    # 8. Logs
     
         $ docker-compose logs
     
-    # 6. Stopping All Services
+    # 9. Stopping All Services
     
         $ docker-compose stop 
