@@ -2,8 +2,8 @@
 
 This is a quick tech demo how write a simple batch factory:
 [Spring Boot](http://projects.spring.io/spring-boot/),
-[Spring Data Rest](http://projects.spring.io/spring-data-rest/)
-[Spring Data JPA] (http://projects.spring.io/spring-data-jpa/)
+[Spring Data Rest](http://projects.spring.io/spring-data-rest/),
+[Spring Data JPA] (http://projects.spring.io/spring-data-jpa/),
 [Spring Batch](http://projects.spring.io/spring-batch/),
 [Spring Integration](http://projects.spring.io/spring-integration/),
 [Undertow](http://undertow.io/),
@@ -20,8 +20,8 @@ This is a quick tech demo how write a simple batch factory:
 
 Clone the git repository using the URL on the github home page:
 
-    $ git clone git@github.com:cneftali/spring-boot-docker-sample.git
-    $ cd spring-boot-docker-sample
+    $ git clone https://github.com/cneftali/simple-batch-factory.git
+    $ cd simple-batch-factory
     $ mvn clean install
 
 
