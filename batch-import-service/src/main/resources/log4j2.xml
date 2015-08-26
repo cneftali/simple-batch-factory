@@ -12,7 +12,7 @@
         <Logger name="org.springframework.batch" level="ERROR" />
         <Logger name="org.springframework.orm.jpa" level="ERROR" />
         <Logger name="org.springframework.batch.core.launch.support" level="ERROR"/>
-        <Logger name="org.springframework.integration" level="ERROR"/>
+        <Logger name="org.springframework.integration" level="DEBUG"/>
         <Logger name="org.apache" level="ERROR"/>
         <Root level="ERROR">
             <AppenderRef ref="CONSOLE"/>

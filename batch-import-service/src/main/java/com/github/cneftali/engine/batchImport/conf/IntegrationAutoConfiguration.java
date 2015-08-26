@@ -1,35 +1,45 @@
 package com.github.cneftali.engine.batchImport.conf;
 
 import static org.springframework.http.HttpMethod.POST;
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.integration.scheduling.PollerMetadata.DEFAULT_POLLER;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.cneftali.job.commons.batch.JobLaunchRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
-import org.springframework.http.client.ClientHttpRequestFactory;
-import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
-import org.springframework.integration.channel.DirectChannel;
+import org.springframework.expression.ExpressionParser;
+import org.springframework.expression.spel.standard.SpelExpressionParser;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.integration.config.EnableIntegration;
 import org.springframework.integration.dsl.IntegrationFlow;
 import org.springframework.integration.dsl.IntegrationFlows;
-import org.springframework.integration.dsl.channel.MessageChannels;
 import org.springframework.integration.dsl.core.Pollers;
-import org.springframework.integration.handler.LoggingHandler;
+import org.springframework.integration.gateway.MessagingGatewaySupport;
 import org.springframework.integration.http.inbound.HttpRequestHandlingMessagingGateway;
 import org.springframework.integration.http.inbound.RequestMapping;
+import org.springframework.integration.http.support.DefaultHttpHeaderMapper;
+import org.springframework.integration.mapping.HeaderMapper;
 import org.springframework.integration.scheduling.PollerMetadata;
-import org.springframework.messaging.MessageHandler;
 
 @Configuration
+@EnableIntegration
 public class IntegrationAutoConfiguration {
 
     @Autowired
     private Environment env;
 
-    @Autowired
-    private ObjectMapper mapper;
+    @Bean
+    public ExpressionParser parser() {
+        return new SpelExpressionParser();
+    }
+
+    @Bean
+    public HeaderMapper<HttpHeaders> headerMapper() {
+        return new DefaultHttpHeaderMapper();
+    }
 
     @Bean(name = DEFAULT_POLLER)
     protected PollerMetadata poller() {
@@ -37,44 +47,35 @@ public class IntegrationAutoConfiguration {
     }
 
     @Bean
-    protected ClientHttpRequestFactory httpRequestFactory() {
-        final HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory();
-        factory.setConnectTimeout(20000);
-        factory.setReadTimeout(20000);
-        factory.setConnectionRequestTimeout(20000);
-        return factory;
+    public IntegrationFlow httpPostFlow() {
+        return IntegrationFlows.from(httpPostGate()).channel("requestChannel").handle("endpoint", "post").get();
     }
 
-    @Bean
-    public DirectChannel requestChannel() {
-        return MessageChannels.direct().get();
-    }
+//    @Bean
+//    protected MessageHandler logger() {
+//        final LoggingHandler loggingHandler = new LoggingHandler("INFO");
+//        loggingHandler.setLoggerName("com.github.cneftali.engine.batchImport.LOGGER");
+//        // This is redundant because the default expression is exactly "payload"
+//        // loggingHandler.setExpression("payload");
+//        return loggingHandler;
+//    }
 
     @Bean
-    public IntegrationFlow flow() {
-        return IntegrationFlows.from(requestChannel()).handle(logger()).get();
+    public MessagingGatewaySupport httpPostGate() {
+        final HttpRequestHandlingMessagingGateway handler = new HttpRequestHandlingMessagingGateway(true);
+        handler.setRequestMapping(createMapping(new HttpMethod[] { POST }, env.getRequiredProperty("application.job.name")));
+        handler.setStatusCodeExpression(parser().parseExpression("T(org.springframework.http.HttpStatus).CREATED"));
+        handler.setRequestPayloadType(JobLaunchRequest.class);
+        handler.setHeaderMapper(headerMapper());
+        return handler;
     }
 
-    @Bean
-    protected MessageHandler logger() {
-        LoggingHandler loggingHandler = new LoggingHandler("INFO");
-        loggingHandler.setLoggerName("com.github.cneftali.engine.batchImport.LOGGER");
-        // This is redundant because the default expression is exactly "payload"
-        // loggingHandler.setExpression("payload");
-        return loggingHandler;
-    }
-
-    @Bean
-    public HttpRequestHandlingMessagingGateway httpGate() {
-        final RequestMapping mapping = new RequestMapping();
-        mapping.setMethods(POST);
-        mapping.setPathPatterns("/batchImport");
-        mapping.setProduces("application/json");
-        mapping.setConsumes("application/json");
-        final HttpRequestHandlingMessagingGateway gateway = new HttpRequestHandlingMessagingGateway(true);
-        gateway.setRequestMapping(mapping);
-        gateway.setRequestChannel(requestChannel());
-        gateway.setRequestPayloadType(JobLaunchRequest.class);
-        return gateway;
+    private RequestMapping createMapping(final HttpMethod[] method, final String... path) {
+        final RequestMapping requestMapping = new RequestMapping();
+        requestMapping.setMethods(method);
+        requestMapping.setConsumes(APPLICATION_JSON_VALUE);
+        requestMapping.setProduces(APPLICATION_JSON_VALUE);
+        requestMapping.setPathPatterns(path);
+        return requestMapping;
     }
 }

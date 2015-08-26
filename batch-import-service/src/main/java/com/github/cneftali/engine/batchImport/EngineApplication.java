@@ -22,13 +22,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
-import org.springframework.integration.annotation.IntegrationComponentScan;
 
 @Configuration
 @EnableAutoConfiguration(exclude = { ErrorMvcAutoConfiguration.class,
                                      WebMvcAutoConfiguration.class })
 @ComponentScan(basePackages = { "com.github.cneftali.engine.batchImport" })
-@IntegrationComponentScan
 public class EngineApplication {
 
     @Bean

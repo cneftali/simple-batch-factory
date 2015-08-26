@@ -1,7 +1,7 @@
 package com.github.cneftali.engine.batchImport;
 
 import static org.fest.assertions.Assertions.assertThat;
-import static org.springframework.http.HttpStatus.OK;
+import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.test.annotation.DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD;
 
 import java.util.ArrayList;
@@ -75,6 +75,7 @@ public class EngineApplicationTest {
         restTemplate.setMessageConverters(messageConverters);
     }
 
+
     @Test
     public void should_create_and_get_job_request() throws Exception {
         // Given
@@ -86,11 +87,12 @@ public class EngineApplicationTest {
         final JobLaunchRequest aRequest = new JobLaunchRequest(jobName, new JobParametersBuilder().toJobParameters(), schedulerId, DateTime.now());
 
         // When
-        final ResponseEntity<String> entity = restTemplate.postForEntity(getBaseUrl(),
-                                                                         aRequest,
-                                                                         String.class);
+        final ResponseEntity<JobLaunchRequest> entity = restTemplate.postForEntity(getBaseUrl(),
+                                                                                   aRequest,
+                                                                                   JobLaunchRequest.class);
 
         // Then
-        assertThat(entity.getStatusCode()).isEqualTo(OK);
+        assertThat(entity.getBody()).isNotNull();
+        assertThat(entity.getStatusCode()).isEqualTo(CREATED);
     }
 }

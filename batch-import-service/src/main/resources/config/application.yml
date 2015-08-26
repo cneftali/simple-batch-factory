@@ -10,6 +10,9 @@ spring:
     jmx.enabled : true
     jmx.default-domain: ${spring.application.name}
     datasource.jmx-enabled: true
+    batch:
+      job.enabled: false
+      initializer.enabled: false
 
 # JMX ENDPOINT
 endpoints:
@@ -19,3 +22,5 @@ endpoints:
 
 # LOGGING
 logging.config: log4j2.xml
+
+application.job.name: batchImport
