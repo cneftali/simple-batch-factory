@@ -15,6 +15,12 @@
 
     <packaging>jar</packaging>
 
+    <properties>
+        <start-class>com.github.cneftali.engine.service.EngineApplication</start-class>
+        <debug.port>5006</debug.port>
+        <jmx.port>1222</jmx.port>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>com.github.cneftali</groupId>

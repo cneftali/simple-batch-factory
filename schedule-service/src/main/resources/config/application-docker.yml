@@ -26,4 +26,4 @@ server:
     port: 8080
 
 application:
-  batch.import.url: http://engineService.cne/process
+  batch.import.url: http://engine-servicex1.cne:8080/process

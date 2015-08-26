@@ -11,7 +11,6 @@ import javax.xml.transform.Source;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.cneftali.job.commons.batch.JobLaunchRequest;
-import com.github.cneftali.job.commons.batch.JobLaunchingResponse;
 import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -80,18 +79,16 @@ public class EngineApplicationTest {
         // Given
         final String jobName = "jobName";
         final long schedulerId = 2L;
-        //        final long jobExecutionId = 150L;
-        //        final Date startDate = new Date();
-        //        final Date endDate = new Date();
         final JobLaunchRequest aRequest = new JobLaunchRequest(jobName,
-                                                               new JobParametersBuilder().toJobParameters(),
+                                                               new JobParametersBuilder().addString("toto", "toto")
+                                                                                         .toJobParameters(),
                                                                schedulerId,
                                                                DateTime.now());
 
         // When
-        final ResponseEntity<JobLaunchingResponse> entity = restTemplate.postForEntity(getBaseUrl(),
+        final ResponseEntity<String> entity = restTemplate.postForEntity(getBaseUrl(),
                                                                                        aRequest,
-                                                                                       JobLaunchingResponse.class);
+                                                                                       String.class);
 
         // Then
         assertThat(entity.getBody()).isNotNull();

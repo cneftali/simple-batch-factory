@@ -1,4 +1,4 @@
-webrest:
+schedule-service:
   restart: always
   build: schedule-service
   ports:
@@ -6,14 +6,14 @@ webrest:
     - "1221:1221"
   links:
     - postgres:devpostgres.cne
-    - engineService1:engineService1.cne
+    - engine-service1:engine-servicex1.cne
 
-engineService1:
+engine-service1:
   restart: always
   build: engine-service
   ports:
       - "8080:8080"
-      - "1221:1221"
+      - "1222:1222"
   environment:
     application.engine.id: 2
 

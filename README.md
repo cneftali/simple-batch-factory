@@ -57,7 +57,7 @@ Clone the git repository using the URL on the github home page:
           }
         }
         
-        $ curl -i -X POST -H "Content-Type:application/json" -d '{ "jobName":"jobName", "jobParameter": {"id":1, "param1": "value"}, "dateStart":"2015-07-10T14:49:04.206Z"}' http://localhost/jobs
+        $ curl -i -X POST -H "Content-Type:application/json" -d '{ "jobName":"jobName", "jobParameter": {"id":1, "param1": "value"}, "dateStart":"2050-07-10T14:49:04.206Z"}' http://localhost/jobs
         HTTP/1.1 201 Created
         Server: Apache-Coyote/1.1
         Location: http://localhost/jobs/1

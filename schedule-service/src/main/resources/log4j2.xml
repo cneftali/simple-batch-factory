@@ -8,7 +8,7 @@
     <Loggers>
         <Logger name="com.github.cneftali" level="INFO" />
         <Logger name="org.springframework" level="ERROR" />
-        <Logger name="org.springframework.boot" level="INFO" />
+        <Logger name="org.springframework.boot" level="ERROR" />
         <Logger name="org.springframework.orm.jpa" level="ERROR" />
         <Logger name="org.springframework.integration" level="ERROR"/>
         <Logger name="org.apache" level="ERROR"/>
