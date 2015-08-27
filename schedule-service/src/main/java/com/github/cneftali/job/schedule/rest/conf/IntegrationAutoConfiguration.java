@@ -39,7 +39,7 @@ import org.springframework.messaging.MessageHandler;
 import org.springframework.transaction.PlatformTransactionManager;
 
 @Configuration
-@AutoConfigureAfter({ HibernateJpaAutoConfiguration.class, RepositoryRestMvcAutoConfiguration.class})
+@AutoConfigureAfter({ HibernateJpaAutoConfiguration.class, RepositoryRestMvcAutoConfiguration.class })
 public class IntegrationAutoConfiguration {
 
     @Autowired
@@ -77,16 +77,15 @@ public class IntegrationAutoConfiguration {
     @Bean
     protected IntegrationFlow flow(final PlatformTransactionManager transactionManager) {
         return IntegrationFlows.from(jpaMessageSource(null),
-                                     c -> c.poller(Pollers.fixedRate(500).maxMessagesPerPoll(1).transactional(
-                                             transactionManager)))
+                                     c -> c.poller(Pollers.fixedRate(500)
+                                                          .maxMessagesPerPoll(1)
+                                                          .transactional(transactionManager)))
                                .channel(c -> c.direct("channels.jdbc.in"))
                                .split()
                                .channel(c -> c.direct("transformChannel"))
                                .transform("@jobRequestTransformer.transform(payload)")
-                               .channel(c -> c.direct("requestChannel"))
                                .enrichHeaders(s -> s.header(CONTENT_TYPE, APPLICATION_JSON_VALUE))
-                               .handle(httpGateway())
-                               .handle(logger())
+                               .channel(c -> c.direct("mainRequestChannel"))
                                .get();
     }
 
@@ -100,13 +99,42 @@ public class IntegrationAutoConfiguration {
     }
 
     @Bean
-    protected MessageHandler httpGateway() {
-        final URI uri = env.getRequiredProperty("application.batch.import.url", URI.class);
+    protected IntegrationFlow flowhttpGateway1() {
+        return IntegrationFlows.from("mainRequestChannel")
+                               .handle(httpGateway1())
+                               .handle(logger())
+                               .get();
+    }
+
+    @Bean
+    protected IntegrationFlow flowhttpGateway2() {
+        return IntegrationFlows.from("mainRequestChannel")
+                               .handle(httpGateway2())
+                               .handle(logger())
+                               .get();
+    }
+
+    @Bean
+    protected MessageHandler httpGateway1() {
+        final URI uri = env.getRequiredProperty("application.engine.1.url", URI.class);
         final HttpRequestExecutingMessageHandler httpHandler = new HttpRequestExecutingMessageHandler(uri);
         httpHandler.setMessageConverters(getHttpMessageConverters());
         httpHandler.setHttpMethod(POST);
         httpHandler.setExpectedResponseType(JobLaunchingResponse.class);
         httpHandler.setRequestFactory(httpRequestFactory());
+        httpHandler.setOrder(1);
+        return httpHandler;
+    }
+
+    @Bean
+    protected MessageHandler httpGateway2() {
+        final URI uri = env.getRequiredProperty("application.engine.2.url", URI.class);
+        final HttpRequestExecutingMessageHandler httpHandler = new HttpRequestExecutingMessageHandler(uri);
+        httpHandler.setMessageConverters(getHttpMessageConverters());
+        httpHandler.setHttpMethod(POST);
+        httpHandler.setExpectedResponseType(JobLaunchingResponse.class);
+        httpHandler.setRequestFactory(httpRequestFactory());
+        httpHandler.setOrder(2);
         return httpHandler;
     }
 

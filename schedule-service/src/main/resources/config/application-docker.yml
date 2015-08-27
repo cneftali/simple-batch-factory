@@ -25,5 +25,6 @@ spring.datasource:
 server:
     port: 8080
 
-application:
-  batch.import.url: http://engine-servicex1.cne:8080/process
+application.engine:
+    1.url: http://engine-servicex1.cne:8080/process
+    2.url: http://engine-servicex2.cne:8080/process

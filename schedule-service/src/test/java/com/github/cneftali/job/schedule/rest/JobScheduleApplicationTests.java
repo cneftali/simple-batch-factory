@@ -49,8 +49,8 @@ public class JobScheduleApplicationTests {
     @Value("${local.server.port}")
     private int port;
 
-    @Value("${application.batch.import.url}")
-    private String batchImportUrl;
+    @Value("${application.engine.2.url}")
+    private String engineUrl;
 
     @Autowired
     private ObjectMapper mapper;
