@@ -7,6 +7,7 @@ schedule-service:
   links:
     - postgres:devpostgres.cne
     - engine-service1:engine-servicex1.cne
+    - engine-service2:engine-servicex2.cne
 
 engine-service1:
   restart: always
@@ -14,6 +15,15 @@ engine-service1:
   ports:
       - "8080:8080"
       - "1222:1222"
+  environment:
+    application.engine.id: 1
+
+engine-service2:
+  restart: always
+  build: engine-service
+  ports:
+      - "9080:8080"
+      - "1223:1222"
   environment:
     application.engine.id: 2
 

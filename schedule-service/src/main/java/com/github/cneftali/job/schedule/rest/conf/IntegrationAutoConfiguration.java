@@ -30,6 +30,7 @@ import org.springframework.integration.dsl.IntegrationFlow;
 import org.springframework.integration.dsl.IntegrationFlows;
 import org.springframework.integration.dsl.core.Pollers;
 import org.springframework.integration.handler.LoggingHandler;
+import org.springframework.integration.http.converter.SerializingHttpMessageConverter;
 import org.springframework.integration.http.outbound.HttpRequestExecutingMessageHandler;
 import org.springframework.integration.jpa.core.JpaExecutor;
 import org.springframework.integration.jpa.inbound.JpaPollingChannelAdapter;
@@ -101,16 +102,20 @@ public class IntegrationAutoConfiguration {
     @Bean
     protected MessageHandler httpGateway() {
         final URI uri = env.getRequiredProperty("application.batch.import.url", URI.class);
-        final MappingJackson2HttpMessageConverter jsonMessageConverter = new MappingJackson2HttpMessageConverter();
-        jsonMessageConverter.setObjectMapper(mapper);
-        final List<HttpMessageConverter<?>> converters = new ArrayList<>();
-        converters.add(jsonMessageConverter);
-
         final HttpRequestExecutingMessageHandler httpHandler = new HttpRequestExecutingMessageHandler(uri);
-        httpHandler.setMessageConverters(converters);
+        httpHandler.setMessageConverters(getHttpMessageConverters());
         httpHandler.setHttpMethod(POST);
         httpHandler.setExpectedResponseType(JobLaunchingResponse.class);
         httpHandler.setRequestFactory(httpRequestFactory());
         return httpHandler;
+    }
+
+    private List<HttpMessageConverter<?>> getHttpMessageConverters() {
+        final MappingJackson2HttpMessageConverter jsonMessageConverter = new MappingJackson2HttpMessageConverter();
+        jsonMessageConverter.setObjectMapper(mapper);
+        final List<HttpMessageConverter<?>> converters = new ArrayList<>();
+        converters.add(jsonMessageConverter);
+        converters.add(new SerializingHttpMessageConverter());
+        return converters;
     }
 }
