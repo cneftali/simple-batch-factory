@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
@@ -8,7 +8,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>1.2.5.RELEASE</version>
-        <relativePath />
+        <relativePath/>
     </parent>
 
     <groupId>com.github.cneftali</groupId>
@@ -16,6 +16,28 @@
     <version>1.0-SNAPSHOT</version>
 
     <packaging>pom</packaging>
+
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+        </license>
+    </licenses>
+
+    <scm>
+        <url>https://github.com/cneftali/simple-batch-factory</url>
+        <connection>scm:git:git://github.com/cneftali/simple-batch-factory.git</connection>
+        <developerConnection>scm:git:git@github.com:cneftali/simple-batch-factory.git</developerConnection>
+    </scm>
+
+    <developers>
+        <developer>
+            <email>cneftali@gmail.com</email>
+            <name>Cyril Neftali</name>
+            <url>https://github.com/cneftali</url>
+            <id>cneftali</id>
+        </developer>
+    </developers>
 
     <modules>
         <module>engine-service</module>
