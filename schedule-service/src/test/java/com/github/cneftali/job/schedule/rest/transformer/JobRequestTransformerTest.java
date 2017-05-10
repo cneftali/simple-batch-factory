@@ -1,7 +1,5 @@
 package com.github.cneftali.job.schedule.rest.transformer;
 
-import static org.fest.assertions.Assertions.assertThat;
-
 import com.github.cneftali.job.commons.batch.JobLaunchRequest;
 import com.github.cneftali.job.schedule.rest.domain.JobRequest;
 import org.joda.time.DateTime;
@@ -10,6 +8,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(MockitoJUnitRunner.class)
 public class JobRequestTransformerTest {

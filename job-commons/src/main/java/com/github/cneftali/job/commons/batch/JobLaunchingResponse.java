@@ -1,13 +1,13 @@
 package com.github.cneftali.job.commons.batch;
 
-import static org.apache.commons.lang3.builder.ToStringStyle.JSON_STYLE;
-
-import java.io.Serializable;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.springframework.batch.core.ExitStatus;
+
+import java.io.Serializable;
+
+import static org.apache.commons.lang3.builder.ToStringStyle.JSON_STYLE;
 
 public class JobLaunchingResponse implements Serializable {
 

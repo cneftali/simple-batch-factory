@@ -1,0 +1,49 @@
+# =======================================================================================================
+# SPRING BOOT PROPERTIES
+#
+# See http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+# See http://symfony.com/fr/doc/current/components/yaml/yaml_format.html
+# See http://codebeautify.org/yaml-validator
+# =======================================================================================================
+
+# IDENTITY
+spring.application:
+  name: engine-service
+
+# APPLICATION SETTINGS
+spring.main:
+  banner-mode: "off"
+  web-environment: true
+
+# BATCH
+spring.batch:
+  job.enabled: false
+  initializer.enabled: false
+
+# JMX
+spring.jmx:
+  enabled: false
+  default-domain: ${spring.application.name}
+
+# JMX ENDPOINT
+endpoints:
+    jmx.enabled: true
+    jmx.domain: ${spring.application.name}
+    jmx.unique-names: false
+
+# LOGGING
+logging.config: classpath:logback.xml
+
+application.job.name: jobName
+application.web.resource.name: process
+---
+
+spring:
+  profiles: docker
+server:
+  port: 8080
+---
+
+spring:
+  profiles: test
+application.engine.id: 2

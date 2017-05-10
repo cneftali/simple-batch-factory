@@ -1,12 +1,13 @@
 package com.github.cneftali.job.schedule.rest.domain;
 
-import static javax.persistence.AccessType.FIELD;
-import static javax.persistence.GenerationType.SEQUENCE;
-
-import java.io.Serializable;
+import com.github.cneftali.job.schedule.rest.domain.converters.JSONObjectConvertor;
+import com.github.cneftali.job.schedule.rest.domain.converters.JodaDateTimeConverter;
+import org.joda.time.DateTime;
+import org.json.JSONObject;
 
 import javax.persistence.Access;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -14,9 +15,10 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import java.io.Serializable;
 
-import org.joda.time.DateTime;
-import org.json.JSONObject;
+import static javax.persistence.AccessType.FIELD;
+import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity(name = "JobRequest")
 @Table(name = "SCHED_JOB_REQUEST")
@@ -42,15 +44,18 @@ public class JobRequest implements Serializable {
     private String jobName;
 
     @Column(name = "JOB_PARAMETER", updatable = false, length = 2000, nullable = false)
+    @Convert(converter = JSONObjectConvertor.class)
     private JSONObject jobParameter;
 
     @Column(name = "DATE_START", updatable = false, nullable = false)
+    @Convert(converter = JodaDateTimeConverter.class)
     private DateTime dateStart;
 
     @Column(name = "STATUS", nullable = false)
-    private JobStatus jobStatus = JobStatus.WAITING;
+    private Integer jobStatus;
 
     public JobRequest() {
+        this.jobStatus = JobStatus.WAITING.getValue();
     }
 
     public JobRequest(final String jobName,
@@ -74,16 +79,15 @@ public class JobRequest implements Serializable {
         return jobParameter;
     }
 
-
     public DateTime getDateStart() {
         return dateStart;
     }
 
     public JobStatus getJobStatus() {
-        return jobStatus;
+        return JobStatus.getByValue(jobStatus);
     }
 
     public void setJobStatus(final JobStatus jobStatus) {
-        this.jobStatus = jobStatus;
+        this.jobStatus = jobStatus.getValue();
     }
 }

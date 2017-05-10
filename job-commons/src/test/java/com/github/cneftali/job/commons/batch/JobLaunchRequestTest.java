@@ -1,11 +1,11 @@
 package com.github.cneftali.job.commons.batch;
 
-import static org.fest.assertions.Assertions.assertThat;
-
 import org.joda.time.DateTime;
 import org.junit.Test;
 import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.JobParametersBuilder;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class JobLaunchRequestTest {
 
@@ -61,7 +61,7 @@ public class JobLaunchRequestTest {
         // Then
         assertThat(result).isNotNull();
         assertThat(result).isEqualTo("{\"jobName\":\"job1\",\"jobParameters\":{},\"scheduleId\":2," +
-                                     "\"createTime\":2015-07-23T15:44:38.111+02:00}");
+                                     "\"createTime\":\"2015-07-23T15:44:38.111+02:00\"}");
 
     }
 }

@@ -1,16 +1,5 @@
 package com.github.cneftali.job.schedule.rest;
 
-import static java.util.concurrent.TimeUnit.MILLISECONDS;
-import static org.fest.assertions.Assertions.assertThat;
-import static org.springframework.http.HttpStatus.OK;
-import static org.springframework.test.annotation.DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD;
-
-import java.net.URI;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.xml.transform.Source;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.cneftali.job.schedule.rest.domain.JobRequest;
 import com.github.cneftali.job.schedule.rest.repository.JobRequestRespository;
@@ -22,9 +11,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.boot.test.TestRestTemplate;
-import org.springframework.boot.test.WebIntegrationTest;
+import org.springframework.boot.context.embedded.LocalServerPort;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.ByteArrayHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -35,18 +24,25 @@ import org.springframework.http.converter.support.AllEncompassingFormHttpMessage
 import org.springframework.http.converter.xml.SourceHttpMessageConverter;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.SocketUtils;
-import org.springframework.web.client.RestTemplate;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = JobScheduleApplication.class)
-@WebIntegrationTest
-@DirtiesContext(classMode = AFTER_EACH_TEST_METHOD)
+import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
+
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.DEFINED_PORT;
+import static org.springframework.http.HttpStatus.OK;
+
+@RunWith(SpringRunner.class)
+@DirtiesContext
 @ActiveProfiles("test")
+@SpringBootTest(classes = JobScheduleApplication.class, webEnvironment = DEFINED_PORT, properties = "server.port=9090")
 public class JobScheduleApplicationTests {
 
-    @Value("${local.server.port}")
+    @LocalServerPort
     private int port;
 
     @Value("${application.engine.2.url}")
@@ -58,7 +54,7 @@ public class JobScheduleApplicationTests {
     @Autowired
     private JobRequestRespository respository;
 
-    private RestTemplate restTemplate = new TestRestTemplate();
+    private TestRestTemplate restTemplate = new TestRestTemplate();
 
 
     private String getBaseUrl() {
@@ -76,12 +72,12 @@ public class JobScheduleApplicationTests {
         messageConverters.add(new ByteArrayHttpMessageConverter());
         messageConverters.add(new StringHttpMessageConverter());
         messageConverters.add(new ResourceHttpMessageConverter());
-        messageConverters.add(new SourceHttpMessageConverter<Source>());
+        messageConverters.add(new SourceHttpMessageConverter<>());
         messageConverters.add(new AllEncompassingFormHttpMessageConverter());
         final MappingJackson2HttpMessageConverter jsonMessageConverter = new MappingJackson2HttpMessageConverter();
         jsonMessageConverter.setObjectMapper(mapper);
         messageConverters.add(jsonMessageConverter);
-        restTemplate.setMessageConverters(messageConverters);
+        restTemplate.getRestTemplate().setMessageConverters(messageConverters);
     }
 
     @Test

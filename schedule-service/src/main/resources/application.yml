@@ -1,0 +1,70 @@
+# =======================================================================================================
+# SPRING BOOT PROPERTIES
+#
+# See http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+# See http://symfony.com/fr/doc/current/components/yaml/yaml_format.html
+# See http://codebeautify.org/yaml-validator
+# =======================================================================================================
+
+# IDENTITY
+spring.application:
+  name: job-scheduler-ws
+
+# APPLICATION SETTINGS
+spring.main:
+  banner-mode: "off"
+  web-environment: true
+
+# JMX
+spring.jmx:
+  enabled: false
+  default-domain: ${spring.application.name}
+
+# JMX ENDPOINT
+endpoints:
+    jmx.enabled: true
+    jmx.domain: ${spring.application.name}
+    jmx.unique-names: false
+
+# LOGGING
+logging.config: classpath:logback.xml
+---
+
+spring:
+  profiles: docker
+server:
+  port: 8080
+spring.jpa:
+  database: POSTGRESQL
+  hibernate.ddl-auto: update
+spring.datasource:
+  url: jdbc:postgresql://devpostgres.cne:5432/docker
+  driver-class-name: org.postgresql.Driver
+  username: docker
+  password: docker
+  poolName: SpringBootHikariCP
+  maximumPoolSize: 5
+  minimumIdle: 3
+  maxLifetime: 2000000
+  connectionTimeout: 30000
+  idleTimeout: 30000
+  pool-prepared-statements: true
+  max-open-prepared-statements: 250
+application.engine:
+    1.url: http://engine-servicex1.cne:8080/process
+    2.url: http://engine-servicex2.cne:8080/process
+---
+
+spring:
+  profiles: test
+# JPA
+spring.jpa:
+  databasePlatform: org.hibernate.dialect.H2Dialect
+  generate-ddl: true
+  hibernate.ddl-auto: update
+spring.jpa.properties:
+  hibernate.format_sql: true
+  hibernate.show_sql: false
+application.engine:
+    1.url: http://engine-servicex1.cne:8080/process
+    2.url: http://localhost:${server.port}/process

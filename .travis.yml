@@ -1,0 +1,15 @@
+sudo: true
+language: java
+jdk:
+  - oraclejdk8
+before_install:
+  - ulimit -c unlimited -S
+after_success:
+  - bash .travis_after_success.sh
+cache:
+  directories:
+    - $HOME/.m2
+addons:
+  apt:
+    packages:
+      - oracle-java8-installer

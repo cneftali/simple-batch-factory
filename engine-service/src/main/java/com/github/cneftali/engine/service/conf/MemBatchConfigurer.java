@@ -1,7 +1,5 @@
 package com.github.cneftali.engine.service.conf;
 
-import javax.annotation.PostConstruct;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.configuration.BatchConfigurationException;
@@ -14,6 +12,8 @@ import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.repository.support.MapJobRepositoryFactoryBean;
 import org.springframework.batch.support.transaction.ResourcelessTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
+
+import javax.annotation.PostConstruct;
 
 public class MemBatchConfigurer implements BatchConfigurer {
 

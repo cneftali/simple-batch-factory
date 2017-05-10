@@ -1,6 +1,10 @@
 Simple Batch Factory
 =====================
 
+[![Build Status](https://api.travis-ci.org/cneftali/simple-batch-factory.svg?branch=master)](https://github.com/cneftali/spring-boot-autoconfigure)
+[![Coverage Status](https://coveralls.io/repos/github/cneftali/simple-batch-factory/badge.svg?branch=master)](https://coveralls.io/github/cneftali/spring-boot-autoconfigure?branch=master)
+[![License](http://img.shields.io/:license-mit-blue.svg?style=flat)](http://doge.mit-license.org)
+
 This is a quick tech demo how write a simple batch factory:
 - [Spring Boot](http://projects.spring.io/spring-boot/),
 - [Spring Data Rest](http://projects.spring.io/spring-data-rest/),

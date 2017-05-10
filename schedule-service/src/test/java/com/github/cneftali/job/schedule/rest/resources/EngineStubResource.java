@@ -1,15 +1,15 @@
-package com.github.cneftali.job.schedule.rest;
-
-import static org.springframework.batch.core.ExitStatus.COMPLETED;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
-
-import java.util.Date;
+package com.github.cneftali.job.schedule.rest.resources;
 
 import com.github.cneftali.job.commons.batch.JobLaunchRequest;
 import com.github.cneftali.job.commons.batch.JobLaunchingResponse;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Date;
+
+import static org.springframework.batch.core.ExitStatus.COMPLETED;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
 @RequestMapping("/process")

@@ -1,16 +1,5 @@
 package com.github.cneftali.job.schedule.rest.conf;
 
-import static com.google.common.net.HttpHeaders.CONTENT_TYPE;
-import static org.springframework.http.HttpMethod.POST;
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
-import static org.springframework.integration.scheduling.PollerMetadata.DEFAULT_POLLER;
-
-import java.net.URI;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.EntityManagerFactory;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.cneftali.job.commons.batch.JobLaunchingResponse;
 import com.github.cneftali.job.schedule.rest.domain.JobRequest;
@@ -38,8 +27,18 @@ import org.springframework.integration.scheduling.PollerMetadata;
 import org.springframework.messaging.MessageHandler;
 import org.springframework.transaction.PlatformTransactionManager;
 
+import javax.persistence.EntityManagerFactory;
+import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.google.common.net.HttpHeaders.CONTENT_TYPE;
+import static org.springframework.http.HttpMethod.POST;
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+import static org.springframework.integration.scheduling.PollerMetadata.DEFAULT_POLLER;
+
 @Configuration
-@AutoConfigureAfter({ HibernateJpaAutoConfiguration.class, RepositoryRestMvcAutoConfiguration.class })
+@AutoConfigureAfter({HibernateJpaAutoConfiguration.class, RepositoryRestMvcAutoConfiguration.class})
 public class IntegrationAutoConfiguration {
 
     @Autowired

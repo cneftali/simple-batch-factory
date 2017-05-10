@@ -1,27 +1,16 @@
 package com.github.cneftali.engine.service;
 
-import static org.fest.assertions.Assertions.assertThat;
-import static org.springframework.http.HttpStatus.CREATED;
-import static org.springframework.test.annotation.DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.xml.transform.Source;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.cneftali.job.commons.batch.JobLaunchRequest;
 import org.joda.time.DateTime;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.batch.core.JobParametersBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.boot.test.TestRestTemplate;
-import org.springframework.boot.test.WebIntegrationTest;
+import org.springframework.boot.context.embedded.LocalServerPort;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.ByteArrayHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -32,32 +21,31 @@ import org.springframework.http.converter.support.AllEncompassingFormHttpMessage
 import org.springframework.http.converter.xml.SourceHttpMessageConverter;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.util.SocketUtils;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.test.context.junit4.SpringRunner;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = EngineApplication.class)
-@WebIntegrationTest
-@DirtiesContext(classMode = AFTER_EACH_TEST_METHOD)
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
+import static org.springframework.http.HttpStatus.CREATED;
+
+@RunWith(SpringRunner.class)
+@DirtiesContext
 @ActiveProfiles("test")
+@SpringBootTest(classes = EngineApplication.class, webEnvironment = RANDOM_PORT)
 public class EngineApplicationTest {
 
-    @Value("${local.server.port}")
-    private int port;
+    @LocalServerPort
+    protected int port;
 
     @Autowired
     private ObjectMapper mapper;
 
-    private RestTemplate restTemplate = new TestRestTemplate();
+    private TestRestTemplate restTemplate = new TestRestTemplate();
 
     private String getBaseUrl() {
         return "http://localhost:" + port + "/process";
-    }
-
-    @BeforeClass
-    public static void beforeClass() throws Exception {
-        System.setProperty("server.port", String.valueOf(SocketUtils.findAvailableTcpPort()));
     }
 
     @Before
@@ -66,12 +54,12 @@ public class EngineApplicationTest {
         messageConverters.add(new ByteArrayHttpMessageConverter());
         messageConverters.add(new StringHttpMessageConverter());
         messageConverters.add(new ResourceHttpMessageConverter());
-        messageConverters.add(new SourceHttpMessageConverter<Source>());
+        messageConverters.add(new SourceHttpMessageConverter<>());
         messageConverters.add(new AllEncompassingFormHttpMessageConverter());
         final MappingJackson2HttpMessageConverter jsonMessageConverter = new MappingJackson2HttpMessageConverter();
         jsonMessageConverter.setObjectMapper(mapper);
         messageConverters.add(jsonMessageConverter);
-        restTemplate.setMessageConverters(messageConverters);
+        restTemplate.getRestTemplate().setMessageConverters(messageConverters);
     }
 
     @Test
@@ -87,8 +75,8 @@ public class EngineApplicationTest {
 
         // When
         final ResponseEntity<String> entity = restTemplate.postForEntity(getBaseUrl(),
-                                                                                       aRequest,
-                                                                                       String.class);
+                                                                         aRequest,
+                                                                         String.class);
 
         // Then
         assertThat(entity.getBody()).isNotNull();

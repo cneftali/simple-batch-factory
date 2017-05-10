@@ -8,7 +8,7 @@ public enum JobStatus {
     int value;
     private static final JobStatus[] JOB_STATUSES = values();
 
-    private JobStatus(int value) {
+    JobStatus(int value) {
         this.value = value;
     }
 
