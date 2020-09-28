@@ -50,7 +50,7 @@
         <commons-lang3.version>3.5</commons-lang3.version>
         <org.projectlombok.version>1.16.10</org.projectlombok.version>
         <guava.version>21.0</guava.version>
-        <jersey.version>2.25.1</jersey.version>
+        <jersey.version>2.32</jersey.version>
         <release.version>
             ${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}
         </release.version>
